@@ -1,0 +1,77 @@
+{
+ "seed": 42,
+ "n_clients": 3,
+ "test_size": 0.2,
+ "n_hash": 1024,
+ "ngram_range": [
+  1,
+  3
+ ],
+ "log1p_columns": [
+  "n_calls",
+  "n_collapsed",
+  "n_procs",
+  "n_unique_apis",
+  "packet_count",
+  "total_bytes",
+  "duration_seconds",
+  "average_packet_bytes",
+  "tcp_packets",
+  "udp_packets",
+  "dns_packets",
+  "http_packets",
+  "tls_packets",
+  "icmp_packets",
+  "other_packets"
+ ],
+ "scaler_fitted_on": "union of the 3 client training sets (global test excluded)",
+ "mean": {
+  "n_calls": 9.577205627981849,
+  "n_collapsed": 9.056353385108677,
+  "n_procs": 1.2819823059783286,
+  "n_unique_apis": 4.487933408711139,
+  "api_entropy": 3.7528120930232554,
+  "packet_count": 5.037360891859932,
+  "total_bytes": 9.654622393631254,
+  "duration_seconds": 4.165652746191211,
+  "average_packet_bytes": 4.634742001176027,
+  "tcp_packets": 3.445895027106476,
+  "udp_packets": 4.339474529680949,
+  "dns_packets": 2.6724094869018162,
+  "http_packets": 1.7268218529266326,
+  "tls_packets": 0.0672115632821807,
+  "icmp_packets": 0.011557705347851164,
+  "other_packets": 3.6569385314781364
+ },
+ "std": {
+  "n_calls": 1.583183463876281,
+  "n_collapsed": 1.4665343339232573,
+  "n_procs": 0.9032335005649658,
+  "n_unique_apis": 0.36245434765123713,
+  "api_entropy": 1.2657812725349789,
+  "packet_count": 0.37630420529507624,
+  "total_bytes": 0.9252283807767153,
+  "duration_seconds": 1.0564039979178044,
+  "average_packet_bytes": 0.5580437032279664,
+  "tcp_packets": 0.8291158805476033,
+  "udp_packets": 0.14167819927206618,
+  "dns_packets": 0.19444716151329164,
+  "http_packets": 0.4475864846877651,
+  "tls_packets": 0.4334126403182803,
+  "icmp_packets": 0.0997470095086802,
+  "other_packets": 0.07029463157952465
+ },
+ "cleaning_log": {
+  "api_rows": 270,
+  "network_rows": 270,
+  "dropped_invalid_pcap": [
+   "S0001"
+  ],
+  "duplicates_api": 0,
+  "duplicates_net": 0,
+  "only_in_one_source": [
+   "S0001"
+  ],
+  "nan_values_before_imputation": 0
+ }
+}
