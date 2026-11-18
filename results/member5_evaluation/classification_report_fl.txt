@@ -1,0 +1,13 @@
+Federated global model on global_test.csv (n=54)
+
+              precision    recall  f1-score   support
+
+  agenttesla      0.529     0.750     0.621        12
+      amadey      0.909     0.909     0.909        11
+    asyncrat      0.778     0.636     0.700        11
+    formbook      0.700     0.636     0.667        11
+     lokibot      0.714     0.556     0.625         9
+
+    accuracy                          0.704        54
+   macro avg      0.726     0.697     0.704        54
+weighted avg      0.723     0.704     0.706        54

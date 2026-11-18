@@ -1,0 +1,17 @@
+sample_id,family,label_agreement,predicted
+S0041,agenttesla,partial,formbook
+S0134,asyncrat,disagree,lokibot
+S0031,agenttesla,agree,formbook
+S0221,formbook,agree,agenttesla
+S0012,agenttesla,agree,formbook
+S0081,amadey,no_avclass,asyncrat
+S0192,formbook,agree,asyncrat
+S0257,lokibot,disagree,amadey
+S0162,asyncrat,disagree,agenttesla
+S0156,asyncrat,disagree,agenttesla
+S0210,formbook,partial,agenttesla
+S0285,lokibot,disagree,agenttesla
+S0207,formbook,disagree,agenttesla
+S0273,lokibot,agree,agenttesla
+S0264,lokibot,disagree,agenttesla
+S0164,asyncrat,no_avclass,lokibot
