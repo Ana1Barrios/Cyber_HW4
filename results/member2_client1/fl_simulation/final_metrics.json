@@ -1,0 +1,59 @@
+{
+ "rounds": 20,
+ "local_epochs": 5,
+ "clients": 3,
+ "strategy": "FedAvg",
+ "seconds": 32.4,
+ "global_test": {
+  "loss": 0.9305198192596436,
+  "accuracy": 0.7037037037037037,
+  "precision_macro": 0.7261132331720568,
+  "recall_macro": 0.6974747474747474,
+  "f1_macro": 0.7042894461859979
+ },
+ "n_global_test": 54,
+ "global_test_confusion": [
+  [
+   9,
+   0,
+   0,
+   3,
+   0
+  ],
+  [
+   0,
+   10,
+   1,
+   0,
+   0
+  ],
+  [
+   2,
+   0,
+   7,
+   0,
+   2
+  ],
+  [
+   3,
+   0,
+   1,
+   7,
+   0
+  ],
+  [
+   3,
+   1,
+   0,
+   0,
+   5
+  ]
+ ],
+ "families": [
+  "agenttesla",
+  "amadey",
+  "asyncrat",
+  "formbook",
+  "lokibot"
+ ]
+}
