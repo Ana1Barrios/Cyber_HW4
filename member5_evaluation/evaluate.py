@@ -2,8 +2,9 @@
 
 What this script does
 ---------------------
-1. Loads the FINAL global model produced by the FL server (Member 4). Until the final run
-   exists, the default is the global model of Member 2's 3-client simulation.
+1. Loads the FINAL global model produced by the FL server (Member 4,
+   results/member4_server/global_model.keras). If member4_server/server.py has not been
+   run on this machine, it falls back to Member 2's 3-client simulation.
 2. Re-trains the comparison models with exactly the same model, data split and training
    budget (20 rounds x 5 local epochs = 100 epochs):
      * local-only Client 1, 2, 3  (each client alone, no collaboration)
@@ -55,8 +56,13 @@ from sklearn.metrics import (accuracy_score, classification_report,  # noqa: E40
 
 OUT = ROOT / "results" / "member5_evaluation"
 FIG = OUT / "figures"
-DEFAULT_FL_MODEL = ROOT / "results" / "member2_client1" / "fl_simulation" / "global_model.keras"
-DEFAULT_FL_ROUNDS = ROOT / "results" / "member2_client1" / "fl_simulation" / "server_rounds.csv"
+# Default input: the final run of Member 4's server (member4_server/server.py). If that run
+# has not been done on this machine, fall back to Member 2's 3-client simulation.
+_SERVER = ROOT / "results" / "member4_server"
+_SIM = ROOT / "results" / "member2_client1" / "fl_simulation"
+_RUN = _SERVER if (_SERVER / "global_model.keras").exists() else _SIM
+DEFAULT_FL_MODEL = _RUN / "global_model.keras"
+DEFAULT_FL_ROUNDS = _RUN / "server_rounds.csv"
 HIGH_CONFIDENCE = ("agree", "partial")  # label confirmed (fully or partly) by AVClass
 
 # --------------------------------------------------------------------------------------
@@ -84,6 +90,12 @@ plt.rcParams.update({
     "font.size": 10, "axes.titlesize": 12, "axes.titleweight": "bold", "legend.frameon": False,
     "figure.dpi": 100, "savefig.dpi": 200, "savefig.bbox": "tight",
 })
+
+
+def _rel(path):
+    """Path relative to the repo root (no personal absolute paths in committed results)."""
+    p = Path(path).resolve()
+    return str(p.relative_to(ROOT)) if p.is_relative_to(ROOT) else p.name
 
 
 # --------------------------------------------------------------------------------------
@@ -223,7 +235,7 @@ def fig_confusion_grid(cms, families, path):
     plt.close(fig)
 
 
-def fig_comparison(summary, path):
+def fig_comparison(summary, path, n_boot):
     """Grouped bars: 4 metrics x 5 models, whiskers = 95 % bootstrap CI."""
     metrics = [("accuracy", "Accuracy"), ("precision_macro", "Precision (macro)"),
                ("recall_macro", "Recall (macro)"), ("f1_macro", "F1 (macro)")]
@@ -249,8 +261,8 @@ def fig_comparison(summary, path):
     ax.grid(axis="x", visible=False)
     ax.set_title("Federated vs. centralised vs. local-only training")
     ax.legend(ncol=5, loc="upper center", bbox_to_anchor=(0.5, -0.1), fontsize=9)
-    fig.text(0.01, -0.12, "Whiskers: 95 % bootstrap confidence interval (2,000 resamples "
-             "of the 54 test samples).", fontsize=8, color=TEXT2)
+    fig.text(0.01, -0.12, "Whiskers: 95 %% bootstrap confidence interval (%s resamples "
+             "of the 54 test samples)." % format(n_boot, ","), fontsize=8, color=TEXT2)
     fig.savefig(path)
     plt.close(fig)
 
@@ -382,7 +394,7 @@ def main():
 
     # ---- everything in one JSON ---------------------------------------------------------
     report = {
-        "fl_model": str(args.fl_model), "n_global_test": int(len(y_te)),
+        "fl_model": _rel(args.fl_model), "n_global_test": int(len(y_te)),
         "n_high_confidence": int(hc.sum()), "families": families, "bootstrap_resamples": n_boot,
         "metrics": summary.set_index("model").to_dict(orient="index"),
         "paired_comparisons_macro_f1": comparisons,
@@ -404,7 +416,7 @@ def main():
     fig_confusion(cms[FL], families, FIG / "fl_confusion_matrix.png",
                   "Federated global model: confusion matrix on the global test set (n = 54)")
     fig_confusion_grid(cms, families, FIG / "confusion_matrices_all_models.png")
-    fig_comparison(summary, FIG / "model_comparison.png")
+    fig_comparison(summary, FIG / "model_comparison.png", n_boot)
     fig_per_class(per_class, families, FIG / "per_class_f1.png")
     if args.fl_rounds and Path(args.fl_rounds).exists():
         fig_convergence(pd.read_csv(args.fl_rounds), summary, FIG / "fl_convergence.png")

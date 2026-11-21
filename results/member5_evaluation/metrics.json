@@ -1,5 +1,5 @@
 {
- "fl_model": "/Users/simon/Developer/ntust_cybersecurity/homework4/results/member2_client1/fl_simulation/global_model.keras",
+ "fl_model": "results/member4_server/global_model.keras",
  "n_global_test": 54,
  "n_high_confidence": 31,
  "families": [

@@ -3,9 +3,10 @@
 `evaluate.py` tests the final FedAvg global model on `data/clients/global_test.csv` (54 samples,
 never used for training) and compares it with local-only and centralised training.
 
-**Status:** the numbers below come from Member 2's 3-client simulation
-(`results/member2_client1/fl_simulation/global_model.keras`). They are a stand-in until
-Member 4's final server run exists; re-run the script on that model (see below).
+**Status:** the numbers below are from the final federated run with Member 4's server and the
+three independent clients (`python member4_server/server.py`, 20 rounds × 5 local epochs, 15 s
+on CPU). This run is bit-identical to Member 2's simulation (same per-round metrics, same
+confusion matrix), because every client uses `fl_common.py` with seed 42.
 
 ## What it computes
 | Item | Details |
@@ -20,9 +21,13 @@ The re-trained baselines reproduce Member 2's `baselines.csv` exactly, so the se
 ## Run
 ```bash
 # from the repo root, in the env of member2_client1/requirements-fl.txt (Python 3.11)
-python member5_evaluation/evaluate.py                       # simulation model (default)
+python member4_server/server.py                             # final FL run -> results/member4_server/
+python member5_evaluation/evaluate.py                       # uses that run (default)
 python member5_evaluation/evaluate.py --fl-model PATH/global_model.keras --fl-rounds PATH/server_rounds.csv
 ```
+Without a `results/member4_server/` run, the default falls back to Member 2's simulation.
+Note: `server.py` starts `member2_client1/client1.py`, which overwrites
+`results/member2_client1/client1/fl_rounds.csv`; do not commit that change.
 `--fl-model` also accepts an `.npz` with the 6 weight arrays in layer order. About 30 s on CPU.
 
 ## Outputs (`results/member5_evaluation/`)
@@ -39,7 +44,7 @@ python member5_evaluation/evaluate.py --fl-model PATH/global_model.keras --fl-ro
 | `figures/per_class_f1.png` | F1 per family: FL, centralised, mean of local-only |
 | `figures/fl_convergence.png` | macro-F1 of the global model per FedAvg round |
 
-## Results (simulation model, 19 Nov 2026)
+## Results (final server run, 21 Nov 2026)
 | Model (global test, n = 54) | Accuracy | Precision | Recall | Macro-F1 | F1 95 % CI |
 |---|---:|---:|---:|---:|---|
 | **Federated (FedAvg)** | **0.704** | **0.726** | **0.697** | **0.704** | [0.56, 0.82] |
