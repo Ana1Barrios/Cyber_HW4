@@ -1,0 +1,26 @@
+model,family,precision,recall,f1,support
+Federated (FedAvg),agenttesla,0.5294,0.7500,0.6207,12
+Federated (FedAvg),amadey,0.9091,0.9091,0.9091,11
+Federated (FedAvg),asyncrat,0.7778,0.6364,0.7000,11
+Federated (FedAvg),formbook,0.7000,0.6364,0.6667,11
+Federated (FedAvg),lokibot,0.7143,0.5556,0.6250,9
+Centralised,agenttesla,0.6000,0.7500,0.6667,12
+Centralised,amadey,0.9000,0.8182,0.8571,11
+Centralised,asyncrat,0.6923,0.8182,0.7500,11
+Centralised,formbook,0.7000,0.6364,0.6667,11
+Centralised,lokibot,0.6667,0.4444,0.5333,9
+Local-only client 1,agenttesla,0.5000,0.5000,0.5000,12
+Local-only client 1,amadey,0.8182,0.8182,0.8182,11
+Local-only client 1,asyncrat,0.6364,0.6364,0.6364,11
+Local-only client 1,formbook,0.6364,0.6364,0.6364,11
+Local-only client 1,lokibot,0.3333,0.3333,0.3333,9
+Local-only client 2,agenttesla,0.8333,0.4167,0.5556,12
+Local-only client 2,amadey,0.9000,0.8182,0.8571,11
+Local-only client 2,asyncrat,0.6364,0.6364,0.6364,11
+Local-only client 2,formbook,0.6000,0.5455,0.5714,11
+Local-only client 2,lokibot,0.3529,0.6667,0.4615,9
+Local-only client 3,agenttesla,0.3750,0.5000,0.4286,12
+Local-only client 3,amadey,0.9091,0.9091,0.9091,11
+Local-only client 3,asyncrat,0.6250,0.4545,0.5263,11
+Local-only client 3,formbook,0.4667,0.6364,0.5385,11
+Local-only client 3,lokibot,0.5000,0.2222,0.3077,9

@@ -1,0 +1,6 @@
+model,accuracy,precision_macro,recall_macro,f1_macro,f1_weighted,accuracy_ci_low,accuracy_ci_high,precision_macro_ci_low,precision_macro_ci_high,recall_macro_ci_low,recall_macro_ci_high,f1_macro_ci_low,f1_macro_ci_high,hc_accuracy,hc_f1_macro
+Federated (FedAvg),0.7037,0.7261,0.6975,0.7043,0.7057,0.5741,0.8333,0.5901,0.8471,0.5649,0.8261,0.5615,0.8204,0.7742,0.6343
+Centralised,0.7037,0.7118,0.6934,0.6948,0.7002,0.5741,0.8148,0.5670,0.8388,0.5652,0.8123,0.5503,0.8116,0.8065,0.6700
+Local-only client 1,0.5926,0.5848,0.5848,0.5848,0.5926,0.4630,0.7222,0.4531,0.7162,0.4513,0.7157,0.4474,0.7049,0.7419,0.6231
+Local-only client 2,0.6111,0.6645,0.6167,0.6164,0.6210,0.4815,0.7407,0.5292,0.7895,0.4871,0.7505,0.4796,0.7395,0.6774,0.6314
+Local-only client 3,0.5556,0.5752,0.5444,0.5420,0.5486,0.4259,0.6852,0.4173,0.7333,0.4221,0.6752,0.4044,0.6649,0.6452,0.5519
